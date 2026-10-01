@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBI - National Crime Information Center (NCIC)</title>
+    <style>
+        :root {
+            --fbi-blue: #0A192F;
+            --fbi-navy: #1E3A8A;
+            --fbi-gold: #D4AF37;
+            --fbi-light: #F8FAFC;
+            --fbi-dark: #0F172A;
+            --fbi-red: #991B1B;
+            --fbi-green: #166534;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--fbi-dark);
+            color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Government Banner */
+        .gov-banner {
+            background-color: #020617;
+            color: #94A3B8;
+            font-size: 12px;
+            padding: 6px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #1E293B;
+        }
+
+        .gov-banner span {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Header / Navbar */
+        header {
+            background: linear-gradient(180deg, #0f2744 0%, var(--fbi-blue) 100%);
+            border-bottom: 3px solid var(--fbi-gold);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .fbi-badge {
+            width: 70px;
+            height: 70px;
+            background: var(--fbi-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fbi-blue);
+            font-weight: 900;
+            font-size: 22px;
+            border: 3px solid #FFF;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .header-text h1 {
+            font-size: 24px;
+            letter-spacing: 1.5px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+
+        .header-text p {
+            font-size: 13px;
+            color: var(--fbi-gold);
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        /* Container Principale */
+        main {
+            flex: 1;
+            max-width: 750px;
+            width: 90%;
+            margin: 30px auto;
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .portal-header {
+            background-color: #0F172A;
+            padding: 15px 25px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .portal-header h2 {
+            font-size: 16px;
+            color: #F8FAFC;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .security-tag {
+            background-color: var(--fbi-red);
+            color: #FFF;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+
+        .portal-body {
+            padding: 30px 25px;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            color: #94A3B8;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            border-left: 3px solid var(--fbi-gold);
+            padding-left: 15px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #CBD5E1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #0F172A;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            color: #FFF;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--fbi-gold);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--fbi-navy);
+            color: #FFF;
+            border: 1px solid #3B82F6;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #2563EB;
+        }
+
+        /* Risultato / Soluzione */
+        #result-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+
+        .success {
+            background-color: #064E3B;
+            border: 1px solid #059669;
+            color: #ECFDF5;
+        }
+
+        .error {
+            background-color: #7F1D1D;
+            border: 1px solid #DC2626;
+            color: #FEF2F2;
+        }
+
+        .warrant-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--fbi-gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: #64748B;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gov-banner">
+        <span>UNITED STATES GOVERNMENT OFFICIAL SYSTEM</span>
+        <span>NCIC DATABASE v4.12</span>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="fbi-badge">FBI</div>
+            <div class="header-text">
+                <h1>Federal Bureau of Investigation</h1>
+                <p>National Crime Information Center — Portal Verification</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="portal-header">
+            <h2>Verifica Mandato d'Arresto & Chiusura Indagine</h2>
+            <span class="security-tag">LIVELLO 4 - RISERVATO</span>
+        </div>
+
+        <div class="portal-body">
+            <p class="intro-text">
+                Inserire i dettagli finali dell'indagine per convalidare le prove dell'agente operative e richiedere l'emissione immediata del mandato d'arresto federale.
+            </p>
+
+            <form id="fbi-form" onsubmit="convalidaIndagine(event)">
+                <div class="form-group">
+                    <label for="suspect">Nome Completo del Sospettato Principale:</label>
+                    <input type="text" id="suspect" placeholder="Es. Nome Cognome" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="evidence">M movente principale o Prova Decisiva:</label>
+                    <input type="text" id="evidence" placeholder="Inserisci il movente o la prova chiave" required autocomplete="off">
+                </div>
+
+                <button type="submit" class="btn-submit">Sblocca Risultanze e Mandato</button>
+            </form>
+
+            <div id="result-box"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>ATTENZIONE: L'accesso non autorizzato a questo sistema informatico è punibile ai sensi della legge federale.</p>
+        <p>Federal Bureau of Investigation — Department of Justice</p>
+    </footer>
+
+    <script>
+        function convalidaIndagine(event) {
+            event.preventDefault();
+            
+            const sospettatoInput = document.getElementById('suspect').value.toLowerCase().trim();
+            const provaInput = document.getElementById('evidence').value.toLowerCase().trim();
+            const resultBox = document.getElementById('result-box');
+
+            // --- INSERISCI QUI LA RISPOSTA CORRETTA (in minuscolo) ---
+            const assassinoCorretto = "[nome e cognome assassino]".toLowerCase();
+            
+            // Puoi aggiungere un controllo flessibile (es. basta che contenga una parola chiave della prova)
+            const provaCorretta = "[parola chiave del movente o della prova]".toLowerCase();
+
+            if (sospettatoInput.includes(assassinoCorretto)) {
+                resultBox.className = "result-box success";
+                resultBox.style.display = "block";
+                resultBox.innerHTML = `
+                    <div class="warrant-title">✔ Mandato d'Arresto Autorizzato #884-FBI</div>
+                    <p><strong>SOGGETTO:</strong> ${document.getElementById('suspect').value.toUpperCase()}</p>
+                    <p><strong>STATO:</strong> MANDATO DI CATTURA ESECUTIVO</p>
+                    <br>
+                    <p><strong>RAPPORTO FINALE DELL'AGENTE:</strong></p>
+                    <p>Eccellente lavoro di analisi, Agente. Le prove raccolte incastrano definitivamente il colpevole. [Inserisci qui la spiegazione dettagliata di come si sono svolti i fatti, perché il colpevole ha agito e come la prova chiave smonta la sua alibi].</p>
+                `;
+            } else {
+                resultBox.className = "result-box error";
+                resultBox.style.display = "block";
+                resultBox.innerHTML = `
+                    <div class="warrant-title" style="color: #FECACA;">❌ Richiesta Mandato Respinta</div>
+                    <p><strong>ERRORE:</strong> Le risultanze inserite non trovano riscontro nei riscontri balistici e autoptici in archivio.</p>
+                    <p>Riesaminare le linee temporali e i documenti del fascicolo prima di tentare un nuovo reinserimento.</p>
+                `;
+            }
+        }
+    </script>
+
+</body>
+</html>
